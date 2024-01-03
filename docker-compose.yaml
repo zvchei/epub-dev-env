@@ -14,7 +14,7 @@ x-base: &base
     security_opt:
         - no-new-privileges
 
-services:      
+services:
     git:
         <<: *base
         build:
@@ -22,11 +22,20 @@ services:
             dockerfile: git.dockerfile
             args:
                 <<: [*args, *git-args]
+
     dev:
         <<: *base
         build:
             context: .
             dockerfile: dev.dockerfile
+            args:
+                <<: *args
+
+    test:
+        <<: *base
+        build:
+            context: .
+            dockerfile: test.dockerfile
             args:
                 <<: *args
 
